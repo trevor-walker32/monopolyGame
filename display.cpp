@@ -27,5 +27,3 @@ char board19[] = "| |           y     |T|";
 char board20[] = "| |                 | |";
 char board21[]=  "|J| | |C| |R|T| |C| |G|";
 
-
-
