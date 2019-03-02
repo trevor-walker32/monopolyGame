@@ -24,86 +24,149 @@ void displayBoard(){
     cout << board21 << endl;
 }
 
-
-
+//messy function!
 void updateBoard(int currentSpot){
     if (currentSpot < 11){ //board21
-        
+        if(currentSpot == 0){
+            board21[21] = '*';
+        }
+        else if(currentSpot == 1){
+            board21[19] = '*';
+        }
+        else if(currentSpot == 2){
+            board21[17] = '*';
+        }
+        else if(currentSpot == 3){
+            board21[15] = '*';
+        }
+        else if(currentSpot == 4){
+            board21[13] = '*';
+        }
+        else if(currentSpot == 5){
+            board21[11] = '*';
+        }
+        else if(currentSpot == 6){
+            board21[9] = '*';
+        }
+        else if(currentSpot == 7){
+            board21[7] = '*';
+        }
+        else if(currentSpot == 8){
+            board21[5] = '*';
+        }
+        else if(currentSpot == 9){
+            board21[3] = '*';
+        }
+        else{
+            board21[1] = '*';
+        }
     }
     else if (currentSpot == 11 || currentSpot ==39){ //board20
         if (currentSpot == 11){
-            board20[1] = '&';
+            board20[1] = '*';
         }
         else{
-            board20[21] = '&';
+            board20[21] = '*';
         }
     }
     else if (currentSpot == 12 || currentSpot ==38){ //board19
         if (currentSpot == 12){
-            board19[1] = '&';
+            board19[1] = '*';
         }
         else{
-            board19[21] = '&';
+            board19[21] = '*';
         }
     }
     else if (currentSpot == 13 || currentSpot ==37){ //board18
         if (currentSpot == 13){
-            board18[1] = '&';
+            board18[1] = '*';
         }
         else{
-            board18[21] = '&';
+            board18[21] = '*';
         }
     }
     else if (currentSpot == 14 || currentSpot ==36){ //board17
         if (currentSpot == 14){
-            board17[1] = '&';
+            board17[1] = '*';
         }
         else{
-            board17[21] = '&';
+            board17[21] = '*';
         }
     }
     else if (currentSpot == 15 || currentSpot ==35){ //board16
         if (currentSpot == 15){
-            board16[1] = '&';
+            board16[1] = '*';
         }
         else{
-            board16[21] = '&';
+            board16[21] = '*';
         }
     }
     else if (currentSpot == 16 || currentSpot ==34){ //board15
         if (currentSpot == 16){
-            board15[1] = '&';
+            board15[1] = '*';
         }
         else{
-            board15[21] = '&';
+            board15[21] = '*';
         }
     }
     else if (currentSpot == 17 || currentSpot ==33){ //board14
         if (currentSpot == 17){
-            board14[1] = '&';
+            board14[1] = '*';
         }
         else{
-            board14[21] = '&';
+            board14[21] = '*';
         }
     }
     else if (currentSpot == 18 || currentSpot ==32){ //board13
         if (currentSpot == 18){
-            board13[1] = '&';
+            board13[1] = '*';
         }
         else{
-            board13[21] = '&';
+            board13[21] = '*';
         }
     }
     else if (currentSpot == 19 || currentSpot ==31){ //board12
         if (currentSpot == 19){
-            board12[1] = '&';
+            board12[1] = '*';
         }
         else{
-            board12[21] = '&';
+            board12[21] = '*';
         }
     }
     else if (currentSpot > 19 && currentSpot < 31 ){ //board11
-
+        if(currentSpot == 30){
+            board11[21] = '*';
+        }
+        else if(currentSpot == 29){
+            board11[19] = '*';
+        }
+        else if(currentSpot == 28){
+            board11[17] = '*';
+        }
+        else if(currentSpot == 27){
+            board11[15] = '*';
+        }
+        else if(currentSpot == 26){
+            board11[13] = '*';
+        }
+        else if(currentSpot == 25){
+            board11[11] = '*';
+        }
+        else if(currentSpot == 24){
+            board11[9] = '*';
+        }
+        else if(currentSpot == 23){
+            board11[7] = '*';
+        }
+        else if(currentSpot == 22){
+            board11[5] = '*';
+        }
+        else if(currentSpot == 21){
+            board11[3] = '*';
+        }
+        else{
+            board11[1] = '*';
+        }
     }
 
 }
@@ -130,7 +193,14 @@ Game::Game()
     while(!newGame->winner){
         newGame->turn();
     }
-    
+    string answer = "";
+    cin >> answer;
+    if(answer == "yes"){
+        Game();
+    }
+    else{
+        cout << "thank you for playing!" << endl;
+    }
     // need to destroy the new players and tiles
 }
 
@@ -1348,24 +1418,30 @@ void Game::Board::tradeTurn() // TODO test this
                 Tile* property;
                 cout << "which deed would you like to trade?" << endl;
                 cin >> propName;
+                cout << "the for loop is the issue" <<endl;
                 for(int i = 0; i < currentPlayer->properties_; i++){
-                    if(currentPlayer->deeds_[i]->name_ == propName){
-                        property = currentPlayer->deeds_[i];
+                    if(currentPlayer->deeds_[i]->name_ == propName){ // TODO either this loop causes a seg fault, or the transfer of the properties is causing it.
+                        property = currentPlayer->deeds_[i]; // nevermind, certain properties are the issue
                     }
                 }
+                cout << "got to line 1426" ;
                 if(property == NULL){
                     cout << "property not found" << endl;
+                    cout << "line1429" <<endl ;
                     return;
                 }
                 else if(property->owned_ == false){
                     cout << "no one owns this property" << endl;
+                    cout << "line1434" <<endl ;
                     return;
                 }
                 else if(property->owner_ != currentPlayer->name_){
                     cout << "you can not trade someone else's property" << endl;
+                    cout << "line1439" <<endl ;
                     return;
                 }
                 else{
+                    cout << "got to line 1443" ;
                     if(item == "property"){ //trade a property for a property
                         string propName1 = "";
                         Tile* property1;
@@ -1497,9 +1573,11 @@ void Game::Board::tradeTurn() // TODO test this
                             currentPlayer->money_ += amount;
                             
                             //add it to the other players list of deeds
+                            cout << "got to line 1575" << endl;
                             otherPlayer->deeds_[otherPlayer->properties_] = new Tile(property->name_,property->owned_,property->value_,property->rent_,property->mortgage_,property->mortgaged_,property->houseCost_,property->houses_,property->owner_);
-                            otherPlayer->deeds_[otherPlayer->properties_]->owner_ = otherPlayer->name_;
-
+                            otherPlayer->deeds_[otherPlayer->properties_]->owner_ = otherPlayer->name_; //TODO this is the other place that may cause the seg fault.
+                            // potential reason, we already initialize 28 properties in the Player constructor, so making a new one might override memory. 
+                            cout << "got to line 1579" << endl;
                             for(int i = 0; i < currentPlayer->properties_; i++){ //get rid of it in the current players list of deeds
                                 if(currentPlayer->deeds_[i]->name_ == property->name_){
                                     currentPlayer->deeds_[i] = NULL;
@@ -1640,9 +1718,11 @@ void Game::Board::tradeTurn() // TODO test this
                     }
                     if(property == NULL){
                         cout << "property not found" << endl;
+                        cout << "line1716" <<endl ;
                         return;
                     }
                     else{
+                        cout << "line1720" <<endl ;
                         
                         cout << "the trade is: "<< endl;
                         cout << currentPlayer->name_ << " will trade "<< amount << " for " << endl;
